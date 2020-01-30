@@ -18,7 +18,7 @@ function App() {
 		setCart([...cart, item]);
 	};
 
-	return ( // why pass value as an object?
+	return ( // why pass value as an object? Why not an array?
 		<ProductContext.Provider value={{ products, addItem }}> 
 			<div className="App">
 				<Navigation cart={cart} />
