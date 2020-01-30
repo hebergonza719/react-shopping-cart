@@ -22,7 +22,7 @@ function App() {
 	return (
 		// why pass value as an object? Why not an array?
 		<ProductContext.Provider value={{ products, addItem }}> 
-			<CartContext value={cart}>
+			<CartContext.Provider value={[cart, setCart]}>
 				<div className="App">
 					{/* this doesn't need props anymore because of CartContext */}
 					{/* <Navigation cart={cart} />  */}
@@ -43,7 +43,7 @@ function App() {
 						// render={() => <ShoppingCart cart={cart} />}
 					/>
 				</div>
-			</CartContext>
+			</CartContext.Provider>
 		</ProductContext.Provider>
 	);
 }
