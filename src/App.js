@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import data from './data';
 
 import ProductContext from "./contexts/ProductContext";
+import CartContext from "./contexts/CartContext";
 
 // Components
 import Navigation from './components/Navigation';
@@ -18,27 +19,31 @@ function App() {
 		setCart([...cart, item]);
 	};
 
-	return ( // why pass value as an object? Why not an array?
+	return (
+		// why pass value as an object? Why not an array?
 		<ProductContext.Provider value={{ products, addItem }}> 
-			<div className="App">
-				<Navigation cart={cart} />
+			<CartContext value={cart}>
+				<div className="App">
+					{/* this doesn't need props anymore because of CartContext */}
+					{/* <Navigation cart={cart} />  */}
+					<Navigation />
 
-				{/* Routes */}
-				<Route exact path="/" component={Products} //What is component? means this component will render
+					{/* Routes */}
+					<Route exact path="/" component={Products} //What is component? means this component will render
 
-					// render={() => (
-					// 	<Products
-					// 		products={products}
-					// 		addItem={addItem}
-					// 	/>
-					// )}
-				/>
+						// render={() => (
+						// 	<Products
+						// 		products={products}
+						// 		addItem={addItem}
+						// 	/>
+						// )}
+					/>
 
-				<Route
-					path="/cart"
-					render={() => <ShoppingCart cart={cart} />}
-				/>
-			</div>
+					<Route path="/cart" component={ShoppingCart}
+						// render={() => <ShoppingCart cart={cart} />}
+					/>
+				</div>
+			</CartContext>
 		</ProductContext.Provider>
 	);
 }
